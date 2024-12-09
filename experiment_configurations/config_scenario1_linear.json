@@ -1,0 +1,29 @@
+{
+  "name": "RL_topological_flexibility_linear",
+  "model_type": "molfomer",
+  "model_path": "/<your_path>/generative/model/path",
+  "input_sequence": "?|?|N[C@@H](C)C(=O)|?|N[C@@H](C)C(=O)|N[C@@H](C)C(=O)|N[C@@H](C)C(=O)|N[C@@H](C)C(=O)|?",
+  "learning_configuration": {
+    "number_steps": 100, "batch_size":32, "score_multiplier":50, "learning_rate":0.0001
+  },
+  "scoring_function": {
+    "scoring_function":"weighted_average",
+    "scoring_components":[{
+      "name": "maximum_ring_size",
+      "weight": 1,
+      "specific_parameters": {"transformation" : {"transformation_type": "reverse_sigmoid", "low": 12, "high":50, "k": 0.4}}
+    }
+    ]
+  },
+  "logging": {
+    "logging_path":"/<your_path>/logging/path/tensorboard",
+    "result_path":"/<your_path>/logging/path/results"
+  },
+  "diversity_filter": {
+    "name": "NoFilterWithPenalty",
+    "score_threshold": 0.4,
+    "bucket_size": 25,
+    "similarity_threshold": 0.4,
+    "penalty": 0.5
+  }
+}

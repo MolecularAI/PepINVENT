@@ -1,0 +1,7 @@
+{
+  "model_path" : "/<your_path>/models/generative_model.ckpt",
+  "test_folder" : "/<your_path>/results"
+}
+
+
+

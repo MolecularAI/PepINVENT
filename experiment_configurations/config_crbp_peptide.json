@@ -1,0 +1,67 @@
+{
+    "name": "RL_cyclic_permeable_soluble_peptides",
+    "model_type": "mol2mol",
+    "model_path": "/<your_path>/generative/model/path",
+    "input_sequence": "N2[C@@H](Cc1ccc(O)cc1)C(=O)|N1[C@@H](CCC1)C(=O)|?|?|N[C@@H](CO)C(=O)|N[C@@H](Cc1ccc(O)cc1)C(=O)|N[C@@H](CCCNC(=N)N)C(=O)|?|?",
+    "learning_configuration": {
+        "number_steps": 1000, "batch_size": 32, "score_multiplier": 80, "learning_rate": 0.00005, "distance_threshold": -20
+    },
+    "scoring_function": {
+        "scoring_function": "geometric_mean",
+        "scoring_components": [{
+            "name": "camsol_solubility",
+            "weight": 1,
+            "specific_parameters": {
+                "transformation": {"transformation_type": "sigmoid", "low": 0, "high": 0.5, "k": 0.5}}
+        },
+        {
+            "name": "predictive_model",
+            "weight": 5,
+            "specific_parameters": {"transformation": {"transformation_type": "no_transformation"},
+                                    "model_path": "/usr/predictive/model/path/model.pckl"}
+        },
+        {
+            "name": "maximum_ring_size",
+            "weight": 1,
+            "specific_parameters": {
+                "transformation": {"transformation_type": "double_sigmoid", "low": 12, "high": 50, "coef_div": 10, "coef_si":20, "coef_se":20}}
+        },
+        {
+            "name": "lipophilicity",
+            "weight": 0,
+            "specific_parameters": {
+                "transformation": {"transformation_type": "step", "low": 1, "high": 4}}
+        },
+        {
+            "name": "custom_alerts",
+            "weight": 1,
+            "specific_parameters": {"transformation": {"transformation_type": "no_transformation"},
+                                    "smarts":  [
+                                    "[#8][#8]",
+                                    "[#6;+]",
+                                    "[#7;!n][S;!$(S(=O)=O)]",
+                                    "[#7;!n][#7;!n]",
+                                    "C#C",
+                                    "C(=[O,S])[O,S]",
+                                    "[#7;!n][C;!$(C(=[O,N])[N,O])][#16;!s]",
+                                    "[#7;!n][C;!$(C(=[O,N])[N,O])][#7;!n]",
+                                    "[#7;!n][C;!$(C(=[O,N])[N,O])][#8;!o]",
+                                    "[#8;!o][C;!$(C(=[O,N])[N,O])][#16;!s]",
+                                    "[#8;!o][C;!$(C(=[O,N])[N,O])][#8;!o]",
+                                    "[#16;!s][C;!$(C(=[O,N])[N,O])][#16;!s]"]}
+       }]
+    },
+  "logging" : {
+  "logging_path": "/<your_path>/logging/path/tensorboard",
+  "result_path": "/<your_path>/logging/path/results"
+  },
+  "diversity_filter" : {
+    "name": "IdenticalMurckoScaffold",
+    "score_threshold": 0.4,
+    "bucket_size": 25,
+    "similarity_threshold": 0.4,
+    "penalty": 0.5
+  }
+}
+
+
