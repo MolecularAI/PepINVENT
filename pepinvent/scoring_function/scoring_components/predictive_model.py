@@ -58,11 +58,3 @@ class PredictiveModel(BaseScoreComponent):
             nidx = idx % size
             arr[nidx] += int(v)
         return arr
-
-#sys.path.append("/tmp/pycharm_project_354")
-#from descriptors.descriptor_factory import DescriptorFactory
-   #def _calculate_descriptors(self, model_dto, molecules: List[str]) -> np.ndarray:
-   #     factory = DescriptorFactory()
-   #     descriptor_dto = factory.create_descriptor_calculator(model_dto.descriptor_calculator)
-   #     descriptors = descriptor_dto.calculator.calculate(molecules)
-   #     return descriptors
