@@ -1,6 +1,6 @@
 {
   "name": "RL_topological_flexibility_cyclic",
-  "model_type": "molfomer",
+  "model_type": "mol2mol",
   "model_path": "/<your_path>/generative/model/path",
   "input_sequence": "?|?|N[C@@H](C)C(=O)|?|N[C@@H](C)C(=O)|N[C@@H](C)C(=O)|N[C@@H](C)C(=O)|N[C@@H](C)C(=O)|?",
   "learning_configuration": {
