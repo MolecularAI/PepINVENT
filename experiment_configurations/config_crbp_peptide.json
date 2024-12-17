@@ -18,7 +18,8 @@
             "name": "predictive_model",
             "weight": 5,
             "specific_parameters": {"transformation": {"transformation_type": "no_transformation"},
-                                    "model_path": "/usr/predictive/model/path/model.pckl"}
+                                    "model_path": "/usr/predictive/model/path/model.pckl",
+                                    "scalar_path": "/usr/feature/scalar/path/model.pckl"}
         },
         {
             "name": "maximum_ring_size",
