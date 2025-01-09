@@ -23,15 +23,15 @@ class IdenticalMurckoScaffold(BaseDiversityFilter):
         scores = score_summary.total_score
         smiles = score_summary.scored_smiles
 
-        for i, smile in enumerate(score_summary.scored_smiles):
-            if self._chemistry.smile_to_mol(smile):  # Checks validity
-                smile = self._chemistry.convert_to_rdkit_smiles(smile, sanitize=True, isomericSmiles=True)
+        for i, chuckles in enumerate(score_summary.scored_smiles):
+            if self._chemistry.smile_to_mol(chuckles):  # Checks validity
+                smile = self._chemistry.convert_to_rdkit_smiles(chuckles, sanitize=True, isomericSmiles=True)
                 scaffold = self._calculate_scaffold(smile)
                 scores[i] = 0 if self._smiles_exists(smile) else scores[i]
                 # scores[i] = self.parameters.penalty * scores[i] if self._smiles_exists(smile) else scores[i]
 
                 if scores[i] >= self.parameters.score_threshold:
-                    self._add_to_memory(i, scores[i], smile, smile, score_summary.scaffold_log, step, scaffold)
+                    self._add_to_memory(i, scores[i], smile, chuckles, score_summary.scaffold_log, step, scaffold)
                     scores[i] = self._penalize_score(scaffold, scores[i])
 
         return scores
