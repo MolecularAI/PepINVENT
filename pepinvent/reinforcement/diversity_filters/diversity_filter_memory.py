@@ -11,7 +11,7 @@ class DiversityFilterMemory:
 
     def __init__(self):
         self._sf_component_name = ScoringFunctionComponentNameEnum()
-        df_dict = {"Step": [], "SampledSequence": [], "SMILES": [], "Scaffold": []}
+        df_dict = {"Step": [], "CHUCKLES": [], "SMILES": [], "Scaffold": []}
         self._memory_dataframe = pd.DataFrame(df_dict)
 
     def update(self, indx: int, score: float, smile: str, sampled_sequences: str, components: List[ComponentSummary], step: int, scaffold: str = ''):
@@ -29,7 +29,7 @@ class DiversityFilterMemory:
             data.append(score)
         headers.append("Step")
         data.append(step)
-        headers.append("SampledSequence")
+        headers.append("CHUCKLES")
         data.append(sampled_sequences)
         headers.append("SMILES")
         data.append(smile)
@@ -53,7 +53,7 @@ class DiversityFilterMemory:
         return (self._memory_dataframe["Scaffold"].values == scaffold).sum()
 
     # def number_of_scaffolds(self):
-    #     return len(set(self._memory_dataframe["SampledSequence"].values))
+    #     return len(set(self._memory_dataframe["CHUCKLES"].values))
 
     def number_of_smiles(self):
         return len(set(self._memory_dataframe["SMILES"].values))
