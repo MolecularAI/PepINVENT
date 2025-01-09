@@ -20,14 +20,14 @@ class NoFilterWithPenalty(BaseDiversityFilter):
         score_summary = deepcopy(score_summary)
         scores = score_summary.total_score
 
-        for i, smile in enumerate(score_summary.scored_smiles):
-            if self._chemistry.smile_to_mol(smile): #Checks validity
-                rdkit_smile = self._chemistry.convert_to_rdkit_smiles(smile)
+        for i, chuckles in enumerate(score_summary.scored_smiles):
+            if self._chemistry.smile_to_mol(chuckles): #Checks validity
+                rdkit_smile = self._chemistry.convert_to_rdkit_smiles(chuckles)
                 scores[i] = self.parameters.penalty*scores[i] if self._smiles_exists(rdkit_smile) else scores[i]
-                self._add_to_memory_check(i, scores, rdkit_smile, score_summary, step)
+                self._add_to_memory_check(i, scores, rdkit_smile, chuckles, score_summary, step)
 
         return scores
 
-    def _add_to_memory_check(self, index: int, scores: List[float], smile: str, score_summary: FinalSummary, step: int):
+    def _add_to_memory_check(self, index: int, scores: List[float], smile: str, chuckles: str, score_summary: FinalSummary, step: int):
         if scores[index] >= self.parameters.score_threshold:
-            self._add_to_memory(index, scores[index], smile, smile, score_summary.scaffold_log, step)
+            self._add_to_memory(index, scores[index], smile, chuckles, score_summary.scaffold_log, step)
