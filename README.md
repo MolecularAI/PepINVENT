@@ -55,13 +55,13 @@ The only thing that needs modification for a standard run are the file and folde
 **1. Sample Peptides from the generative model**: Sample peptides with new amino acids in the query positions using the pre-trained generative model.
 
    ```bash
-   python input_to_sampling.py some_sampling_parameters.json
+   python input_to_sampling.py your_sampling_parameters.json
    ```
 
 **2. Generate Peptides with RL**: Design peptides in the RL loop, optimized for user-defined criteria.
 
    ```bash
-   python input_to_reinforcement_learning.py some_generative_run_setup.json
+   python input_to_reinforcement_learning.py your_generative_run_setup.json
    ```
 
 ## Configuration
